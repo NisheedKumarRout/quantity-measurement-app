@@ -4,26 +4,39 @@ import static org.junit.jupiter.api.Assertions.*;
 class QuantityMeasurementAppTest {
 
     @Test
-    void givenSameFeetValues_shouldReturnTrue() {
+    void testFeetToFeet_sameValue() {
         QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertTrue(app.quantityMeasurementApp(5.0, 5.0, "feet"));
+        assertTrue(app.quantityMeasurementApp(1.0, 1.0, "feet", "feet"));
     }
 
     @Test
-    void givenDifferentFeetValues_shouldReturnFalse() {
+    void testInchToInch_sameValue() {
         QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertFalse(app.quantityMeasurementApp(5.0, 6.0, "feet"));
+        assertTrue(app.quantityMeasurementApp(12.0, 12.0, "inch", "inch"));
     }
 
     @Test
-    void givenSameInchesValues_shouldReturnTrue() {
+    void testFeetToInch_equivalent() {
         QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertTrue(app.quantityMeasurementApp(10.0, 10.0, "inches"));
+        assertTrue(app.quantityMeasurementApp(1.0, 12.0, "feet", "inch"));
     }
 
     @Test
-    void givenDifferentInchesValues_shouldReturnFalse() {
+    void testInchToFeet_equivalent() {
         QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertFalse(app.quantityMeasurementApp(10.0, 12.0, "inches"));
+        assertTrue(app.quantityMeasurementApp(12.0, 1.0, "inch", "feet"));
+    }
+
+    @Test
+    void testDifferentValues() {
+        QuantityMeasurementApp app = new QuantityMeasurementApp();
+        assertFalse(app.quantityMeasurementApp(1.0, 2.0, "feet", "feet"));
+    }
+
+    @Test
+    void testNullComparison() {
+        QuantityMeasurementApp app = new QuantityMeasurementApp();
+        assertFalse(new QuantityMeasurementApp().new Quantity(1.0,
+                QuantityMeasurementApp.LengthUnit.FEET).equals(null));
     }
 }
