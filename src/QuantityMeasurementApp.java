@@ -1,16 +1,18 @@
 public class QuantityMeasurementApp {
 
-    // Main method for equality check
+    // Main method
     public boolean quantityMeasurementApp(double value1, double value2, String unit1, String unit2) {
         Quantity q1 = new Quantity(value1, LengthUnit.fromString(unit1));
         Quantity q2 = new Quantity(value2, LengthUnit.fromString(unit2));
         return q1.equals(q2);
     }
 
-    // ENUM for units
+    // ENUM with extended units
     enum LengthUnit {
         FEET(1.0),
-        INCH(1.0 / 12.0);
+        INCH(1.0 / 12.0),
+        YARD(3.0),                 // 1 yard = 3 feet
+        CM(0.393701 / 12.0);       // 1 cm = 0.393701 inches → convert to feet
 
         private final double toFeet;
 
@@ -31,13 +33,20 @@ public class QuantityMeasurementApp {
                 case "inch":
                 case "inches":
                     return INCH;
+                case "yard":
+                case "yards":
+                    return YARD;
+                case "cm":
+                case "centimeter":
+                case "centimeters":
+                    return CM;
                 default:
                     throw new IllegalArgumentException("Invalid unit: " + unit);
             }
         }
     }
 
-    // Generic Quantity class (DRY applied)
+    // Generic Quantity class (unchanged from UC3)
     static class Quantity {
         private final double value;
         private final LengthUnit unit;

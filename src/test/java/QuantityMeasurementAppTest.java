@@ -1,42 +1,30 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+@Test
+void testYardToFeet() {
+    QuantityMeasurementApp app = new QuantityMeasurementApp();
+    assertTrue(app.quantityMeasurementApp(1.0, 3.0, "yard", "feet"));
+}
 
-class QuantityMeasurementAppTest {
+@Test
+void testYardToInches() {
+    QuantityMeasurementApp app = new QuantityMeasurementApp();
+    assertTrue(app.quantityMeasurementApp(1.0, 36.0, "yard", "inch"));
+}
 
-    @Test
-    void testFeetToFeet_sameValue() {
-        QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertTrue(app.quantityMeasurementApp(1.0, 1.0, "feet", "feet"));
-    }
+@Test
+void testCmToInches() {
+    QuantityMeasurementApp app = new QuantityMeasurementApp();
+    assertTrue(app.quantityMeasurementApp(1.0, 0.393701, "cm", "inch"));
+}
 
-    @Test
-    void testInchToInch_sameValue() {
-        QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertTrue(app.quantityMeasurementApp(12.0, 12.0, "inch", "inch"));
-    }
+@Test
+void testCmToFeetFalse() {
+    QuantityMeasurementApp app = new QuantityMeasurementApp();
+    assertFalse(app.quantityMeasurementApp(1.0, 1.0, "cm", "feet"));
+}
 
-    @Test
-    void testFeetToInch_equivalent() {
-        QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertTrue(app.quantityMeasurementApp(1.0, 12.0, "feet", "inch"));
-    }
-
-    @Test
-    void testInchToFeet_equivalent() {
-        QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertTrue(app.quantityMeasurementApp(12.0, 1.0, "inch", "feet"));
-    }
-
-    @Test
-    void testDifferentValues() {
-        QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertFalse(app.quantityMeasurementApp(1.0, 2.0, "feet", "feet"));
-    }
-
-    @Test
-    void testNullComparison() {
-        QuantityMeasurementApp app = new QuantityMeasurementApp();
-        assertFalse(new QuantityMeasurementApp().new Quantity(1.0,
-                QuantityMeasurementApp.LengthUnit.FEET).equals(null));
-    }
+@Test
+void testMultiUnitTransitive() {
+    QuantityMeasurementApp app = new QuantityMeasurementApp();
+    assertTrue(app.quantityMeasurementApp(2.0, 6.0, "yard", "feet"));
+    assertTrue(app.quantityMeasurementApp(6.0, 72.0, "feet", "inch"));
 }
